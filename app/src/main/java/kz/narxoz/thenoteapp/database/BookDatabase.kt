@@ -4,21 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import kz.narxoz.thenoteapp.database.BookDatabase
 
-@Database(entities = [Student::class], version = 1, exportSchema = false)
-abstract class StudentDatabase : RoomDatabase() {
-    abstract fun studentDao(): StudentDao
+
+@Database(entities = [Book::class], version = 1, exportSchema = false)
+abstract class BookDatabase : RoomDatabase() {
+    abstract fun studentDao(): BookDao
 
     companion object {
         @Volatile
-        private var INSTANCE: StudentDatabase? = null
+        private var INSTANCE: BookDatabase? = null
 
-        fun getDataBase(context: Context): StudentDatabase {
+        fun getDataBase(context: Context): BookDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    StudentDatabase::class.java,
-                    "student_database"
+                    BookDatabase::class.java,
+                    "book_database"
                 ).build()
                 INSTANCE = instance
                 instance
